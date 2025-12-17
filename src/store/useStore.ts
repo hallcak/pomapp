@@ -32,7 +32,7 @@ interface AppState {
   updateSettings: (settings: Partial<TimerSettings>) => void
 
   // Task Actions
-  addTask: (title: string, tags?: string[]) => void
+  addTask: (title: string, tags?: string[]) => string
   toggleTask: (id: string) => void
   deleteTask: (id: string) => void
   updateTask: (id: string, updates: Partial<Task>) => void
@@ -161,7 +161,8 @@ export const useStore = create<AppState>()(
           tags,
           createdAt: new Date(),
         }
-        set({ tasks: [...get().tasks, task] })
+        set({ tasks: [task, ...get().tasks] })
+        return task.id
       },
 
       toggleTask: (id) => {

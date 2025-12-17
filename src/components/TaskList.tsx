@@ -20,7 +20,8 @@ export function TaskList({ compact = false }: TaskListProps) {
   const handleAddTask = (e: React.FormEvent) => {
     e.preventDefault()
     if (newTaskTitle.trim()) {
-      addTask(newTaskTitle.trim())
+      const newTaskId = addTask(newTaskTitle.trim())
+      setCurrentTask(newTaskId)
       setNewTaskTitle('')
     }
   }
@@ -37,9 +38,22 @@ export function TaskList({ compact = false }: TaskListProps) {
             Current Task
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-4">
+          {/* Add Task Form */}
+          <form onSubmit={handleAddTask} className="flex gap-2">
+            <Input
+              placeholder="Write Task ID"
+              value={newTaskTitle}
+              onChange={(e) => setNewTaskTitle(e.target.value)}
+              className="flex-1 h-9 text-sm"
+            />
+            <Button type="submit" size="sm" disabled={!newTaskTitle.trim()}>
+              <Plus className="h-4 w-4" />
+            </Button>
+          </form>
+
           {incompleteTasks.length === 0 ? (
-            <p className="text-sm text-muted-foreground">No tasks yet. Add one!</p>
+            <p className="text-sm text-muted-foreground">No tasks yet.</p>
           ) : (
             <div className="space-y-2">
               {incompleteTasks.slice(0, 3).map((task) => (

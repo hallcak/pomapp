@@ -79,14 +79,14 @@ export function Sidebar() {
   return (
     <aside className="w-64 min-h-screen bg-background border-r-3 border-foreground p-6 flex flex-col">
       {/* Logo */}
-      <div className="mb-8">
+      <NavLink to="/" className="block mb-8">
         <h1 className="text-3xl font-black uppercase tracking-tight">
           Pom<span className="text-primary">app</span>
         </h1>
         <p className="text-xs text-muted-foreground mt-1 uppercase tracking-wide">
           Focus. Work. Repeat.
         </p>
-      </div>
+      </NavLink>
 
       {/* Navigation */}
       <nav className="flex-1 space-y-2">
